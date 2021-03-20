@@ -3,15 +3,9 @@ Transform: AWS::Serverless-2016-10-31
 
 Globals:
   Function:
-    Layers:
-      - !If [
-        isSamLocal,
-        !Ref 'AWS::NoValue',
-        !Sub 'arn:aws:lambda:${AWS::Region}:464622532012:layer:Datadog-Node12-x:39',
-      ]
-    Timeout: 25
+    Timeout: 5
     Runtime: nodejs12.x
-    MemorySize: 2048
+    MemorySize: 256
     Environment:
       Variables:
         APP_NAME: 'ServerlessDemo'
@@ -25,6 +19,7 @@ Parameters:
 
 Conditions:
   isSamLocal: !Equals [!Ref 'AWS::StackName', '']
+
 Resources:
   HelloWorld:
     Type: AWS::Serverless::Function
