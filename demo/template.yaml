@@ -1,0 +1,46 @@
+Description: Serverless demo
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Layers:
+      - !If [
+        isSamLocal,
+        !Ref 'AWS::NoValue',
+        !Sub 'arn:aws:lambda:${AWS::Region}:464622532012:layer:Datadog-Node12-x:39',
+      ]
+    Timeout: 25
+    Runtime: nodejs12.x
+    MemorySize: 2048
+    Environment:
+      Variables:
+        APP_NAME: 'ServerlessDemo'
+        EPSAGON_TOKEN: !Ref EpsagonToken
+        DISABLE_EPSAGON: !If [isSamLocal, 'true', 'false']
+
+Parameters:
+  EpsagonToken:
+    Type: 'AWS::SSM::Parameter::Value<String>'
+    Default: '/monitoring/epsagonToken'
+
+Conditions:
+  isSamLocal: !Equals [!Ref 'AWS::StackName', '']
+Resources:
+  HelloWorld:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: helloWorldHandler.default
+      Runtime: nodejs12.x
+      MemorySize: 256
+      Timeout: 5
+      Events:
+        HelloWorldEvent:
+          Type: Api
+          Properties:
+            Path: /hello-world
+            Method: GET
+
+Outputs:
+  Api:
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${ServerlessRestApiProdStage}/"
