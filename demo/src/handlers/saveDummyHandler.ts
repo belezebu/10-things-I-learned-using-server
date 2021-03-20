@@ -33,7 +33,6 @@ const saveDummyHandler = async (
       ...dummy
     }
   };
-  Logger.info('Params', { params });
   try {
     await documentClient.put(params).promise();
     return createAPIResponse(201, { dummyId });
