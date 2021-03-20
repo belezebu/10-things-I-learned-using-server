@@ -1,4 +1,4 @@
-# 10-things-I-learned-using-server
+# 10 Things I Learned Using Serverless
 
 Repository with presentation code
 
