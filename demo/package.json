@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/aws-lambda": "^8.10.36",
+    "@types/lodash.flow": "^3.5.6",
     "@types/node": "^12.12.9",
     "aws-sdk": "~2.536.0",
     "concurrently": "^5.0.0",
@@ -29,6 +30,12 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
-    "epsagon": "^1.106.1"
+    "@dazn/lambda-powertools-middleware-correlation-ids": "^1.28.1",
+    "@dazn/lambda-powertools-middleware-sample-logging": "^1.28.1",
+    "@middy/core": "^1.5.2",
+    "@middy/http-error-handler": "^1.5.2",
+    "@middy/http-json-body-parser": "^1.5.2",
+    "epsagon": "^1.106.1",
+    "lodash.flow": "^3.5.0"
   }
 }
