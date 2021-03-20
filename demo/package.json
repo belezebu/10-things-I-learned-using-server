@@ -7,7 +7,7 @@
     "build:dev": "webpack --config webpack.dev.js",
     "lint": "eslint . --ext .ts --fix",
     "watch": "yarn build --watch",
-    "start": "sam local start-api -p 5000 -t template.yaml",
+    "start": "sam local start-api -p 5000 -t template.yaml -n .config/env.json",
     "dev": "concurrently \"yarn:watch\" \"yarn:start\"",
     "package": "sam package --debug --template template.yaml --s3-bucket 10-things-talk --output-template-file packaged.yaml",
     "deploy": "sam deploy --template-file packaged.yaml --stack-name serverless-demo --capabilities CAPABILITY_IAM"
@@ -42,6 +42,8 @@
     "@middy/http-error-handler": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
     "epsagon": "^1.106.1",
-    "lodash.flow": "^3.5.0"
+    "http-errors": "^1.8.0",
+    "lodash.flow": "^3.5.0",
+    "uuid": "^8.3.2"
   }
 }
