@@ -41,9 +41,7 @@
     "@middy/core": "^1.5.2",
     "@middy/http-error-handler": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
-    "epsagon": "^1.106.1",
     "http-errors": "^1.8.0",
-    "lodash.flow": "^3.5.0",
     "uuid": "^8.3.2"
   }
 }

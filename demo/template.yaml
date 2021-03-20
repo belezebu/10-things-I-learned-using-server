@@ -9,13 +9,6 @@ Globals:
     Environment:
       Variables:
         APP_NAME: 'ServerlessDemo'
-        EPSAGON_TOKEN: !Ref EpsagonToken
-        DISABLE_EPSAGON: !If [isSamLocal, 'true', 'false']
-
-Parameters:
-  EpsagonToken:
-    Type: 'AWS::SSM::Parameter::Value<String>'
-    Default: '/monitoring/epsagonToken'
 
 Conditions:
   isSamLocal: !Equals [!Ref 'AWS::StackName', '']

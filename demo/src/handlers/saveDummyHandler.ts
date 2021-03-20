@@ -1,5 +1,4 @@
 import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { init, lambdaWrapper } from 'epsagon';
 import middy from '@middy/core';
 import httpErrorHandler from '@middy/http-error-handler';
 import jsonBodyParser from '@middy/http-json-body-parser';
@@ -10,12 +9,6 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { v4 } from 'uuid';
 import createError from 'http-errors';
 import { createAPIResponse } from '../utils/utils';
-
-init({
-  token: process.env.EPSAGON_TOKEN,
-  appName: process.env.APP_NAME,
-  metadataOnly: false
-});
 
 const documentClient = new DocumentClient({
   apiVersion: '2012-08-10',
@@ -51,9 +44,7 @@ const saveDummyHandler = async (
   }
 };
 
-export default flow([lambdaWrapper])(
-  middy(saveDummyHandler)
+export default middy(saveDummyHandler)
     .use(captureCorrelationIds({ sampleDebugLogRate: 1.0 }))
     .use(jsonBodyParser())
     .use(httpErrorHandler())
-);
